@@ -22,7 +22,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(\App\Reply::class);
 
         $this->post('replies/' . $reply->id . '/favorites');
 
@@ -34,7 +34,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(\App\Reply::class);
 
         $reply->favorite();
 
@@ -48,7 +48,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(\App\Reply::class);
 
         try {
             $this->post('replies/' . $reply->id . '/favorites');

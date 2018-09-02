@@ -13,18 +13,18 @@ class MentionUsersTest extends TestCase
     function mentioned_users_in_a_reply_are_notified()
     {
         // Given we have a user, JohnDoe, who is signed in.
-        $john = create('App\User', ['name' => 'JohnDoe']);
+        $john = create(\App\User::class, ['name' => 'JohnDoe']);
 
         $this->signIn($john);
 
         // And we also have a user, JaneDoe.
-        $jane = create('App\User', ['name' => 'JaneDoe']);
+        $jane = create(\App\User::class, ['name' => 'JaneDoe']);
 
         // If we have a thread
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         // And JohnDoe replies to that thread and mentions @JaneDoe.
-        $reply = make('App\Reply', [
+        $reply = make(\App\Reply::class, [
             'body' => 'Hey @JaneDoe check this out.'
         ]);
 
@@ -37,9 +37,9 @@ class MentionUsersTest extends TestCase
     /** @test */
     function it_can_fetch_all_mentioned_users_starting_with_the_given_characters()
     {
-        create('App\User', ['name' => 'johndoe']);
-        create('App\User', ['name' => 'johndoe2']);
-        create('App\User', ['name' => 'janedoe']);
+        create(\App\User::class, ['name' => 'johndoe']);
+        create(\App\User::class, ['name' => 'johndoe2']);
+        create(\App\User::class, ['name' => 'janedoe']);
 
         $results = $this->json('GET', '/api/users', ['name' => 'john']);
 

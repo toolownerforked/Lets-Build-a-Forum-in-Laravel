@@ -16,7 +16,7 @@ class LockThreadsTest extends TestCase
 
         $this->signIn();
 
-        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $thread = create(\App\Thread::class, ['user_id' => auth()->id()]);
 
         $this->post(route('locked-threads.store', $thread))->assertStatus(403);
 
@@ -26,9 +26,9 @@ class LockThreadsTest extends TestCase
     /** @test */
     function administrators_can_lock_threads()
     {
-        $this->signIn(factory('App\User')->states('administrator')->create());
+        $this->signIn(factory(\App\User::class)->states('administrator')->create());
 
-        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $thread = create(\App\Thread::class, ['user_id' => auth()->id()]);
 
         $this->post(route('locked-threads.store', $thread));
 
@@ -38,9 +38,9 @@ class LockThreadsTest extends TestCase
     /** @test */
     function administrators_can_unlock_threads()
     {
-        $this->signIn(factory('App\User')->states('administrator')->create());
+        $this->signIn(factory(\App\User::class)->states('administrator')->create());
 
-        $thread = create('App\Thread', ['user_id' => auth()->id(), 'locked' => true]);
+        $thread = create(\App\Thread::class, ['user_id' => auth()->id(), 'locked' => true]);
 
         $this->delete(route('locked-threads.destroy', $thread));
 
@@ -52,7 +52,7 @@ class LockThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread', ['locked' => true]);
+        $thread = create(\App\Thread::class, ['locked' => true]);
 
         $this->post($thread->path() . '/replies', [
             'body' => 'Foobar',

@@ -17,13 +17,13 @@ class ThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = create('App\Thread');
+        $this->thread = create(\App\Thread::class);
     }
 
     /** @test */
     function a_thread_has_a_path()
     {
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         $this->assertEquals(
             "/threads/{$thread->channel->slug}/{$thread->slug}",
@@ -34,7 +34,7 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_has_a_creator()
     {
-        $this->assertInstanceOf('App\User', $this->thread->creator);
+        $this->assertInstanceOf(\App\User::class, $this->thread->creator);
     }
 
     /** @test */
@@ -76,15 +76,15 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_belongs_to_a_channel()
     {
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
-        $this->assertInstanceOf('App\Channel', $thread->channel);
+        $this->assertInstanceOf(\App\Channel::class, $thread->channel);
     }
 
     /** @test */
     function a_thread_can_be_subscribed_to()
     {
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         $thread->subscribe($userId = 1);
 
@@ -97,7 +97,7 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_can_be_unsubscribed_from()
     {
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         $thread->subscribe($userId = 1);
 
@@ -109,7 +109,7 @@ class ThreadTest extends TestCase
     /** @test */
     function it_knows_if_the_authenticated_user_is_subscribed_to_it()
     {
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         $this->signIn();
 
@@ -125,7 +125,7 @@ class ThreadTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread');
+        $thread = create(\App\Thread::class);
 
         tap(auth()->user(), function ($user) use ($thread) {
             $this->assertTrue($thread->hasUpdatesFor($user));
@@ -139,7 +139,7 @@ class ThreadTest extends TestCase
     /** @test */
     function a_threads_body_is_sanitized_automatically()
     {
-        $thread = make('App\Thread', ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
+        $thread = make(\App\Thread::class, ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
 
         $this->assertEquals("<p>This is okay.</p>", $thread->body);
     }
