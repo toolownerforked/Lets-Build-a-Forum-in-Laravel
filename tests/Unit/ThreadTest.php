@@ -26,7 +26,8 @@ class ThreadTest extends TestCase
         $thread = create('App\Thread');
 
         $this->assertEquals(
-            "/threads/{$thread->channel->slug}/{$thread->slug}", $thread->path()
+            "/threads/{$thread->channel->slug}/{$thread->slug}",
+            $thread->path()
         );
     }
 
@@ -40,7 +41,8 @@ class ThreadTest extends TestCase
     function a_thread_has_replies()
     {
         $this->assertInstanceOf(
-            'Illuminate\Database\Eloquent\Collection', $this->thread->replies
+            'Illuminate\Database\Eloquent\Collection',
+            $this->thread->replies
         );
     }
 

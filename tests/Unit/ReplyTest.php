@@ -52,7 +52,6 @@ class ReplyTest extends TestCase
             'Hello <a href="/profiles/Jane-Doe">@Jane-Doe</a>.',
             $reply->body
         );
-
     }
 
     /** @test */
